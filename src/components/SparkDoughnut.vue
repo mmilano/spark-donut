@@ -118,20 +118,6 @@ export default {
         return this.counterClockwise ? "widdershins" : "clockwise";
     },
 
-    // compute the rotation of the arc.
-    // cicle path ALWAYS starks painting @ 3:00, and goes clockwise.
-    // so to make arc appear to begin at 12:00, roration must be computed:
-    // for clockwise:  {return -90°}
-    // for widdershins: {  - (90° + degrees-of-arc) }
-
-    // counterClockwiseTransform() {
-      // 360 * this.value = the degrees of the arc
-      // let rotation = -( (360 * this.value/100) + 90);
-      // let style = `transform: rotate(${rotation})`;
-      // this.transformRotation = style;
-      // return style;
-    // },
-
     // boolean test for wehther or not the stroke width is a percentage, or a fixed measurement
     strokeIsPercentage() {
       // return (/^(\d+|(\.\d+))(\.\d+)?%$/.test(this.stroke));
@@ -161,6 +147,12 @@ export default {
       let style = {
         stroke: this.colorForeground
       };
+
+      // compute the rotation of the arc.
+      // circle path ALWAYS starks painting @ 3:00, and goes clockwise.
+      // so to make arc appear to begin at 12:00, roration must be computed:
+      // for clockwise:  {return -90°}
+      // for widdershins: {  - (90° + degrees-of-arc) }
       if (this.counterClockwise) {
         let rotation = -((360 * this.value/100) + 90);
         style.transform = `rotate(${rotation}deg)`;
@@ -174,25 +166,5 @@ export default {
 </script>
 
 <style lang="scss">
-
-  $doughnut-background-color: #DDD;
-
-  .doughnut-background {
-    stroke: $doughnut-background-color;
-  }
-
-  .doughnut-arc {
-      transform-origin: center;
-      // stroke: #202089;
-  }
-
-  // counterclockwise
-  // transformation varies according to the arc's value, so needs to be calculated
-  .widdershins {}
-
-  // clockwise transformation does not vary
-  .clockwise {
-      transform: rotate(-90deg);
-  }
-
+  @use "@/assets/scss/sparkDoughnut";
 </style>

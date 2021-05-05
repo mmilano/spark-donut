@@ -1,0 +1,19 @@
+
+$doughnut-background-color: #DDD;
+
+.doughnut-background {
+    stroke: $doughnut-background-color;
+}
+
+.doughnut-arc {
+    transform-origin: center;
+}
+
+// counterclockwise
+// transformation varies according to the arc's value, so needs to be calculated
+.widdershins {}
+
+// clockwise transformation does not vary
+.clockwise {
+    transform: rotate(-90deg);
+}
