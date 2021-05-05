@@ -1,44 +1,204 @@
+/*
+notes about SVG circles:
+The path begins at the "3 o'clock" point on the radius and proceeds in a clock-wise direction (before any transformations).
+*/
+
+
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest" target="_blank" rel="noopener">unit-jest</a></li>
-    </ul>
 
-
+  <div class="sparkchart-donut">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle
+        class="donut-background"
+        :stroke-width="strokeWidth"
+        fill="none"
+        cx="50" cy="50"
+        :r="radius"
+      />
+      <circle
+        class="donut-arc"
+        :class="direction"
+        :style="transformRotation"
+        :stroke-width="strokeWidth"
+        :stroke-dasharray="strokeDashArray"
+        stroke-linecap="butt"
+        fill="none"
+        cx="50" cy="50"
+        :r="radius"
+      />
+    </svg>
   </div>
+
 </template>
 
 <script>
+
 export default {
-  name: 'Hello',
+  name: "SparkDonut",
+
   props: {
-    msg: String
-  }
+
+    // logical radius of the donut ≈ how you think about it
+    // basically 1/2 of the viewport
+    radiusLogical: {
+      type: [String, Number],
+      default: 50
+    },
+
+    // stroke size can be percentage (default) or a fixed number.
+    // note that when percentage, it is logically expressed as %, but that is a % of 1/2 total width = % of radius
+    stroke: {
+      type: [String, Number],
+      default: "60%"
+    },
+
+    // the "value" of the donut's arc
+    // Expected to be %
+    value: {
+      type: Number,
+      required: true
+    },
+
+    // should the arc rotate in counterclockwise or clockwise direction
+    counterClockwise: {
+      type: Boolean,
+      default: true,
+    },
+
+    // color of unfilled area
+    colorBackground: {
+      type: String,
+      default: "#DDD",
+      required: false
+    },
+
+    // color of filled area
+    colorForeground: {
+      type: String,
+      default: "#F00",
+      required: false
+    },
+
+  },
+
+  data() {
+    return {
+      transformRotation: null,
+    }
+  },
+
+  defaultChartWidth: 100,
+
+  methods: {
+    fixedLen: (v) => v.toFixed(4),
+    //
+      // console.log ("fixing: ", v, "-", v.toFixed(4));
+      // return v.toFixed(4);
+    // }
+  },
+
+  computed: {
+
+    // calculated radius to account for the stroke width
+    radius() {
+      return this.radiusLogical - (this.strokeWidth/2);
+      // let strokeSize = (parseFloat(this.stroke) / 100) * this.$options.defaultChartWidth;
+      // return this.radiusLogical - (strokeSize/2);
+    },
+
+    // total circumference of the donut
+    // also the value for strokeGap
+    circumference() {
+        return this.fixedLen((2 * Math.PI * this.radius));
+    },
+
+    // is it counterclockwise or clockwise?
+    direction() {
+        return this.counterClockwise ? "widdershins" : "clockwise";
+    },
+
+    // compute the rotation of the arc.
+    // cicle path ALWAYS starks painting @ 3:00, and goes clockwise.
+    // so to make arc appear to begin at 12:00, roration must be computed:
+    // for clockwise:  {return -90°}
+    // for widdershins: {  - (90° + degrees-of-arc) }
+
+    // counterClockwiseTransform() {
+      // 360 * this.value = the degrees of the arc
+      // let rotation = -( (360 * this.value/100) + 90);
+      // let style = `transform: rotate(${rotation})`;
+      // this.transformRotation = style;
+      // return style;
+    // },
+
+    // boolean test for wether or not the stroke width is a percentage, or a fixed measurement
+    strokeIsPercentage() {
+      // return (/^(\d+|(\.\d+))(\.\d+)?%$/.test(this.stroke));
+      return String(this.stroke).indexOf("%") > -1 ? true : false;
+    },
+
+    // if fixed width, then no complications.
+    // if response/%, then more complicated: % is really percentage of 1/2 overall width.
+    strokeWidth() {
+      return this.strokeIsPercentage ? (((parseFloat(this.stroke) / 100) / 2) * this.$options.defaultChartWidth) : this.stroke;
+    },
+
+    // strokeDash = the length of the dash size = the length of the values 'arc' on the donut
+    strokeDash() {
+      // return ((this.circumference / 100) * this.value).toFixed(4);
+      return this.fixedLen((this.circumference / 100) * this.value);
+    },
+
+    // strokeGap() {
+    //   return this.circumference;
+    // },
+
+    strokeDashArray() {
+      // let strokeDash = this.fixedLen((this.circumference / 100) * this.value);
+      return `${this.strokeDash},${this.circumference}`;
+    }
+  },
+
+  mounted() {
+
+    // compute the counterClockwise transformation if widdershins
+    // creates an inline css style
+    if (this.counterClockwise) {
+      const rotation = -((360 * this.value/100) + 90);
+      this.transformRotation = `transform: rotate(${rotation}deg)`;
+    };
+  },
+
 }
 </script>
 
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang="scss">
+
+  // $donut-background-color: this.$options.bcolor;
+  $donut-background-color: #DDD;
+
+  // .spark {
+  //   border: 1px dotted #444;
+  //   width: 230px;
+  // }
+
+  .donut-background {
+    // stroke: #DDD;
+    stroke: $donut-background-color;
+  }
+
+  .donut-arc {
+      // transform: rotate(-180deg);
+      transform-origin: center;
+      stroke: #202089;
+  }
+
+  // counterclockwise
+  .widdershins {
+      // transform: rotate(-180deg);
+  }
+  .clockwise {
+      transform: rotate(-90deg);
+  }
+
 </style>
