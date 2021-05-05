@@ -1,13 +1,13 @@
 <template>
   <main id="app">
-    <Hello msg="Spark Chart Doughnut"/>
+    <Demo />
 
-    <h2>one</h2>
+    <h2>Example 1</h2>
     <div class="doughnut1">
       <SparkDoughnut v-bind="$options.doughnutExample1"></SparkDoughnut>
     </div>
 
-    <h2>two</h2>
+    <h2>Example 2</h2>
     <div class="doughnut2">
       <SparkDoughnut v-bind="$options.doughnutExample2"></SparkDoughnut>
     </div>
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import Hello from './components/Hello.vue';
+import Demo from './components/Demo.vue';
 import SparkDoughnut from './components/SparkDoughnut.vue';
 
 export default {
   name: "App",
 
   components: {
-    Hello,
+    Demo,
     SparkDoughnut
   },
 
@@ -43,39 +43,35 @@ export default {
     counterClockwise: false
   },
 
-  computed: {
-  },
+  computed: {},
 
-  mounted() {
-  },
+  mounted() {},
 }
 </script>
 
 <style lang="scss">
 
+  .doughnut1 {
+    width: 200px;
+  }
 
-.doughnut1 {
-  width: 200px;
-}
+  .doughnut2 {
+    width: 111px;
+  }
 
-.doughnut2 {
-  width: 111px;
-}
+  // .o-spark {
+  //   border: 1px dotted #999;
+  //   width: 260px;
+  // }
 
+  // .o-doughnut-background {
+  //   stroke: #DDD;
+  // }
 
-.o-spark {
-  border: 1px dotted #999;
-  width: 260px;
-}
-
-.o-doughnut-background {
-  stroke: #DDD;
-}
-
-.o-doughnut-arc {
-    transform: rotate(-180deg);
-    transform-origin: center;
-    stroke: #20894f;
-}
+  // .o-doughnut-arc {
+  //     transform: rotate(-180deg);
+  //     transform-origin: center;
+  //     stroke: #20894f;
+  // }
 
 </style>
