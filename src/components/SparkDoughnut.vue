@@ -1,8 +1,12 @@
 /*
+spark chart: single value doughnut
+mmilano.2021
+*/
+
+/*
 notes about SVG circles:
 The path begins at the "3 o'clock" point on the radius and proceeds in a clock-wise direction (before any transformations).
 */
-
 
 <template>
 
@@ -18,7 +22,7 @@ The path begins at the "3 o'clock" point on the radius and proceeds in a clock-w
       <circle
         class="doughnut-arc"
         :class="direction"
-        :style="transformRotation"
+        :style="arcStyle"
         :stroke-width="strokeWidth"
         :stroke-dasharray="strokeDashArray"
         stroke-linecap="butt"
@@ -38,7 +42,7 @@ export default {
 
   props: {
 
-    // logical radius of the doughnut ≈ how you think about it
+    // logical radius of the doughnut ≈ how you commonly think about it
     // basically 1/2 of the viewport
     radiusLogical: {
       type: [String, Number],
@@ -75,26 +79,25 @@ export default {
     // color of filled area
     colorForeground: {
       type: String,
-      default: "#F00",
+      default: "#202089",
       required: false
     },
 
   },
 
-  data() {
-    return {
-      transformRotation: null,
-    }
-  },
+  // data() {
+    // return {
+      // arcStyle: {
+      //     stroke: this.colorForeground
+      // },
+    // }
+  // },
 
   defaultChartWidth: 100,
 
   methods: {
+    // common fixed/limited number of decimal places for the computed values
     fixedLen: (v) => v.toFixed(4),
-    //
-      // console.log ("fixing: ", v, "-", v.toFixed(4));
-      // return v.toFixed(4);
-    // }
   },
 
   computed: {
@@ -102,8 +105,6 @@ export default {
     // calculated radius to account for the stroke width
     radius() {
       return this.radiusLogical - (this.strokeWidth/2);
-      // let strokeSize = (parseFloat(this.stroke) / 100) * this.$options.defaultChartWidth;
-      // return this.radiusLogical - (strokeSize/2);
     },
 
     // total circumference of the doughnut
@@ -131,7 +132,7 @@ export default {
       // return style;
     // },
 
-    // boolean test for wether or not the stroke width is a percentage, or a fixed measurement
+    // boolean test for wehther or not the stroke width is a percentage, or a fixed measurement
     strokeIsPercentage() {
       // return (/^(\d+|(\.\d+))(\.\d+)?%$/.test(this.stroke));
       return String(this.stroke).indexOf("%") > -1 ? true : false;
@@ -145,7 +146,6 @@ export default {
 
     // strokeDash = the length of the dash size = the length of the values 'arc' on the doughnut
     strokeDash() {
-      // return ((this.circumference / 100) * this.value).toFixed(4);
       return this.fixedLen((this.circumference / 100) * this.value);
     },
 
@@ -154,19 +154,20 @@ export default {
     // },
 
     strokeDashArray() {
-      // let strokeDash = this.fixedLen((this.circumference / 100) * this.value);
       return `${this.strokeDash},${this.circumference}`;
+    },
+
+    arcStyle() {
+      let style = {
+        stroke: this.colorForeground
+      };
+      if (this.counterClockwise) {
+        let rotation = -((360 * this.value/100) + 90);
+        style.transform = `rotate(${rotation}deg)`;
+      }
+      return style;
     }
-  },
 
-  mounted() {
-
-    // compute the counterClockwise transformation if widdershins
-    // creates an inline css style
-    if (this.counterClockwise) {
-      const rotation = -((360 * this.value/100) + 90);
-      this.transformRotation = `transform: rotate(${rotation}deg)`;
-    };
   },
 
 }
@@ -174,29 +175,22 @@ export default {
 
 <style lang="scss">
 
-  // $doughnut-background-color: this.$options.bcolor;
   $doughnut-background-color: #DDD;
 
-  // .spark {
-  //   border: 1px dotted #444;
-  //   width: 230px;
-  // }
-
   .doughnut-background {
-    // stroke: #DDD;
     stroke: $doughnut-background-color;
   }
 
   .doughnut-arc {
-      // transform: rotate(-180deg);
       transform-origin: center;
-      stroke: #202089;
+      // stroke: #202089;
   }
 
   // counterclockwise
-  .widdershins {
-      // transform: rotate(-180deg);
-  }
+  // transformation varies according to the arc's value, so needs to be calculated
+  .widdershins {}
+
+  // clockwise transformation does not vary
   .clockwise {
       transform: rotate(-90deg);
   }
