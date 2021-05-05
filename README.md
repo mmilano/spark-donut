@@ -1,4 +1,4 @@
-# spark-donut
+# spark-doughnut
 
 ## Project setup
 ```

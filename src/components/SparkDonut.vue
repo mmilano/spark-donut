@@ -6,17 +6,17 @@ The path begins at the "3 o'clock" point on the radius and proceeds in a clock-w
 
 <template>
 
-  <div class="sparkchart-donut">
+  <div class="sparkchart-doughnut">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <circle
-        class="donut-background"
+        class="doughnut-background"
         :stroke-width="strokeWidth"
         fill="none"
         cx="50" cy="50"
         :r="radius"
       />
       <circle
-        class="donut-arc"
+        class="doughnut-arc"
         :class="direction"
         :style="transformRotation"
         :stroke-width="strokeWidth"
@@ -34,11 +34,11 @@ The path begins at the "3 o'clock" point on the radius and proceeds in a clock-w
 <script>
 
 export default {
-  name: "SparkDonut",
+  name: "SparkDoughnut",
 
   props: {
 
-    // logical radius of the donut ≈ how you think about it
+    // logical radius of the doughnut ≈ how you think about it
     // basically 1/2 of the viewport
     radiusLogical: {
       type: [String, Number],
@@ -52,7 +52,7 @@ export default {
       default: "60%"
     },
 
-    // the "value" of the donut's arc
+    // the "value" of the doughnut's arc
     // Expected to be %
     value: {
       type: Number,
@@ -106,7 +106,7 @@ export default {
       // return this.radiusLogical - (strokeSize/2);
     },
 
-    // total circumference of the donut
+    // total circumference of the doughnut
     // also the value for strokeGap
     circumference() {
         return this.fixedLen((2 * Math.PI * this.radius));
@@ -143,7 +143,7 @@ export default {
       return this.strokeIsPercentage ? (((parseFloat(this.stroke) / 100) / 2) * this.$options.defaultChartWidth) : this.stroke;
     },
 
-    // strokeDash = the length of the dash size = the length of the values 'arc' on the donut
+    // strokeDash = the length of the dash size = the length of the values 'arc' on the doughnut
     strokeDash() {
       // return ((this.circumference / 100) * this.value).toFixed(4);
       return this.fixedLen((this.circumference / 100) * this.value);
@@ -174,20 +174,20 @@ export default {
 
 <style lang="scss">
 
-  // $donut-background-color: this.$options.bcolor;
-  $donut-background-color: #DDD;
+  // $doughnut-background-color: this.$options.bcolor;
+  $doughnut-background-color: #DDD;
 
   // .spark {
   //   border: 1px dotted #444;
   //   width: 230px;
   // }
 
-  .donut-background {
+  .doughnut-background {
     // stroke: #DDD;
-    stroke: $donut-background-color;
+    stroke: $doughnut-background-color;
   }
 
-  .donut-arc {
+  .doughnut-arc {
       // transform: rotate(-180deg);
       transform-origin: center;
       stroke: #202089;

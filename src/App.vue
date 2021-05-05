@@ -1,15 +1,15 @@
 <template>
   <main id="app">
-    <Hello msg="Spark Chart Donut"/>
+    <Hello msg="Spark Chart Doughnut"/>
 
     <h2>one</h2>
-    <div class="donut1">
-      <SparkDonut v-bind="$options.donutExample1"></SparkDonut>
+    <div class="doughnut1">
+      <SparkDoughnut v-bind="$options.doughnutExample1"></SparkDoughnut>
     </div>
 
     <h2>two</h2>
-    <div class="donut2">
-      <SparkDonut v-bind="$options.donutExample2"></SparkDonut>
+    <div class="doughnut2">
+      <SparkDoughnut v-bind="$options.doughnutExample2"></SparkDoughnut>
     </div>
 
   </main>
@@ -17,26 +17,26 @@
 
 <script>
 import Hello from './components/Hello.vue';
-import SparkDonut from './components/SparkDonut.vue';
+import SparkDoughnut from './components/SparkDoughnut.vue';
 
 export default {
   name: "App",
 
   components: {
     Hello,
-    SparkDonut
+    SparkDoughnut
   },
 
   data() {
     return {};
   },
 
-  donutExample1: {
+  doughnutExample1: {
     value: 35,
     colorForeground: "#33F",
   },
 
-  donutExample2: {
+  doughnutExample2: {
     value: 55,
     colorForeground: "#33F",
     stroke: 5,
@@ -52,22 +52,15 @@ export default {
 </script>
 
 <style lang="scss">
-// .container {
-//   width: 220px;
-//   border: 1px dotted #999;
-//   svg {
-//     width: 100%;
-//   }
-// }
 
-.donut1 {
+
+.doughnut1 {
   width: 200px;
 }
 
-.donut2 {
-  width: 200px;
+.doughnut2 {
+  width: 111px;
 }
-
 
 
 .o-spark {
@@ -75,11 +68,11 @@ export default {
   width: 260px;
 }
 
-.o-donut-background {
+.o-doughnut-background {
   stroke: #DDD;
 }
 
-.o-donut-arc {
+.o-doughnut-arc {
     transform: rotate(-180deg);
     transform-origin: center;
     stroke: #20894f;

@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
 
     <p>
-      A simple donut chart created with generated SVG and css.
+      A simple doughnut chart created with generated SVG and css.
     </p>
 
 
@@ -15,7 +15,7 @@
     along with twenty or thirty search results.
 
     </p>
-    <h2>Donut Chart properties</h2>
+    <h2>Doughnut Chart properties</h2>
 
     <ul>
       <li>r = 50</li>
