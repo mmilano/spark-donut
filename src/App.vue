@@ -38,7 +38,7 @@ export default {
 
   doughnutExample2: {
     value: 55,
-    colorForeground: "#33F",
+    colorForeground: "#F3F",
     stroke: 5,
     counterClockwise: false
   },
