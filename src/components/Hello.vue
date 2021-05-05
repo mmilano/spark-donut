@@ -2,7 +2,19 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
 
+    <p>
+      A simple donut chart created with generated SVG and css.
+    </p>
 
+
+
+    <p>
+
+    original start for work comes from
+    https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart/
+    along with twenty or thirty search results.
+
+    </p>
     <h2>Donut Chart properties</h2>
 
     <ul>

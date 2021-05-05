@@ -2,7 +2,7 @@
   <main id="app">
     <Hello msg="Spark Chart Donut"/>
 
-  <h2>one</h2>
+    <h2>one</h2>
     <div class="donut1">
       <SparkDonut v-bind="$options.donutExample1"></SparkDonut>
     </div>
