@@ -57,7 +57,7 @@ export default {
     },
 
     // the "value" of the doughnut's arc
-    // Expected to be %
+    // Expected to be % of the whole
     value: {
       type: Number,
       required: true
@@ -85,14 +85,7 @@ export default {
 
   },
 
-  // data() {
-    // return {
-      // arcStyle: {
-      //     stroke: this.colorForeground
-      // },
-    // }
-  // },
-
+  // internal value for chart's internal view width
   defaultChartWidth: 100,
 
   methods: {
@@ -120,12 +113,14 @@ export default {
 
     // boolean test for wehther or not the stroke width is a percentage, or a fixed measurement
     strokeIsPercentage() {
+      // regex check
       // return (/^(\d+|(\.\d+))(\.\d+)?%$/.test(this.stroke));
+      // simple check
       return String(this.stroke).indexOf("%") > -1 ? true : false;
     },
 
-    // if fixed width, then no complications.
-    // if response/%, then more complicated: % is really percentage of 1/2 overall width.
+    // if fixed width, then used directly.
+    // if responsive/%, then more complicated: % is really percentage of 1/2 overall width.
     strokeWidth() {
       return this.strokeIsPercentage ? (((parseFloat(this.stroke) / 100) / 2) * this.$options.defaultChartWidth) : this.stroke;
     },
