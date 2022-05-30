@@ -1,10 +1,20 @@
-module.exports = {
-  outputDir: 'build',
+// module.exports = {
+//   outputDir: 'build',
 
-  css: {
-    sourceMap: true
-  },
+//   css: {
+//     sourceMap: true
+//   },
 
-  runtimeCompiler: true,
-  lintOnSave: false
-}
+//   runtimeCompiler: true,
+//   // lintOnSave: true
+// }
+
+const { defineConfig } = require("@vue/cli-service");
+module.exports = defineConfig({
+    outputDir: "build",
+    transpileDependencies: false,
+    css: {
+        sourceMap: true,
+    },
+});
+
