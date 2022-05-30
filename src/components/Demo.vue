@@ -59,15 +59,13 @@
       <li>Stroke length' = (C'/ 100) * (Percentage fill) = 62.83</li>
     </ul>
 
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Demo',
-
-}
+  name: "DemoDonut",
+};
 </script>
 
 <style scoped lang="scss">
