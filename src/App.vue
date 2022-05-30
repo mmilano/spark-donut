@@ -16,15 +16,15 @@
 </template>
 
 <script>
-import Demo from './components/Demo.vue';
-import SparkDoughnut from './components/SparkDoughnut.vue';
+import Demo from "./components/Demo.vue";
+import SparkDoughnut from "./components/SparkDoughnut.vue";
 
 export default {
   name: "App",
 
   components: {
     Demo,
-    SparkDoughnut
+    SparkDoughnut,
   },
 
   data() {
@@ -40,13 +40,13 @@ export default {
     value: 55,
     colorForeground: "#F3F",
     stroke: 5,
-    counterClockwise: false
+    counterClockwise: false,
   },
 
-  computed: {},
+  // computed: {},
 
-  mounted() {},
-}
+  // mounted() {},
+};
 </script>
 
 <style lang="scss">
