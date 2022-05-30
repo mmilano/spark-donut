@@ -46,21 +46,21 @@ export default {
     // basically 1/2 of the viewport
     radiusLogical: {
       type: [String, Number],
-      default: 50
+      default: 50,
     },
 
     // stroke size can be percentage (default) or a fixed number.
     // note that when percentage, it is logically expressed as %, but that is a % of 1/2 total width = % of radius
     stroke: {
       type: [String, Number],
-      default: "60%"
+      default: "60%",
     },
 
     // the "value" of the doughnut's arc
     // Expected to be % of the whole
     value: {
       type: Number,
-      required: true
+      required: true,
     },
 
     // should the arc rotate in counterclockwise or clockwise direction
@@ -73,14 +73,14 @@ export default {
     colorBackground: {
       type: String,
       default: "#DDD",
-      required: false
+      required: false,
     },
 
     // color of filled area
     colorForeground: {
       type: String,
       default: "#202089",
-      required: false
+      required: false,
     },
 
   },
@@ -97,18 +97,18 @@ export default {
 
     // calculated radius to account for the stroke width
     radius() {
-      return this.radiusLogical - (this.strokeWidth/2);
+      return this.radiusLogical - (this.strokeWidth / 2);
     },
 
     // total circumference of the doughnut
     // also the value for strokeGap
     circumference() {
-        return this.fixedLen((2 * Math.PI * this.radius));
+      return this.fixedLen(2 * Math.PI * this.radius);
     },
 
     // is it counterclockwise or clockwise?
     direction() {
-        return this.counterClockwise ? "widdershins" : "clockwise";
+      return this.counterClockwise ? "widdershins" : "clockwise";
     },
 
     // boolean test for wehther or not the stroke width is a percentage, or a fixed measurement
@@ -116,7 +116,7 @@ export default {
       // regex check
       // return (/^(\d+|(\.\d+))(\.\d+)?%$/.test(this.stroke));
       // simple check
-      return String(this.stroke).indexOf("%") > -1 ? true : false;
+      return String(this.stroke).indexOf("%") > -1;
     },
 
     // if fixed width, then used directly.
@@ -139,8 +139,8 @@ export default {
     },
 
     arcStyle() {
-      let style = {
-        stroke: this.colorForeground
+      const style = {
+        stroke: this.colorForeground,
       };
 
       // compute the rotation of the arc.
@@ -149,15 +149,15 @@ export default {
       // for clockwise:  {return -90°}
       // for widdershins: {  - (90° + degrees-of-arc) }
       if (this.counterClockwise) {
-        let rotation = -((360 * this.value/100) + 90);
+        const rotation = -((360 * this.value / 100) + 90);
         style.transform = `rotate(${rotation}deg)`;
       }
       return style;
-    }
+    },
 
   },
 
-}
+};
 </script>
 
 <style lang="scss">
