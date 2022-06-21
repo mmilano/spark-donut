@@ -11,8 +11,9 @@ $doughnut-background-color: #DDD;
 }
 
 // counterclockwise
-// transformation varies according to the arc's value, so needs to be calculated
-.widdershins {}
+// transformation varies according to the arc's value
+// currently unused/disabled
+// .widdershins {}
 
 // clockwise transformation does not vary
 .clockwise {
