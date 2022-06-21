@@ -7,47 +7,45 @@
     </p>
 
     <p>
-    original start for work comes from
-    https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart/
-    along with twenty or thirty search results.
-
+      original start for work comes from
+      https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart/
+      along with twenty or thirty search results.
     </p>
 
     <h2>Doughnut Chart properties</h2>
-<div class="properties">
-<table >
-  <tr>
-    <th>Property</th>
-    <th>units</th>
-    <th>description</th>
-  </tr>
+    <div class="properties">
+    <table >
+      <tr>
+        <th>Property</th>
+        <th>units</th>
+        <th>description</th>
+      </tr>
 
-  <tr>
-    <td>radius</td>
-    <td>%</td>
-    <td>radius of the doughnut. Defaults to 1/2 of the size.</td>
-  </tr>
+      <tr>
+        <td>radius</td>
+        <td>%</td>
+        <td>radius of the doughnut. Defaults to 1/2 of the size.</td>
+      </tr>
 
-  <tr>
-    <td>circumference</td>
-    <td>px</td>
-    <td>Calculated circumference of the doughnut (outside dimension)</td>
-  </tr>
+      <tr>
+        <td>circumference</td>
+        <td>px</td>
+        <td>Calculated circumference of the doughnut (outside dimension)</td>
+      </tr>
 
-  <tr>
-    <td>value</td>
-    <td>%</td>
-    <td>the value metric to be displayed, as % of the 100% total</td>
-  </tr>
+      <tr>
+        <td>value</td>
+        <td>%</td>
+        <td>the value metric to be displayed, as % of the 100% total</td>
+      </tr>
 
-  <tr>
-    <td>arc length</td>
-    <td>px</td>
-    <td>the length of the arc, or "filled area" of the doughnut, based on the value metric</td>
-  </tr>
-
-</table>
-</div>
+      <tr>
+        <td>arc length</td>
+        <td>px</td>
+        <td>the length of the arc, or "filled area" of the doughnut, based on the value metric</td>
+      </tr>
+    </table>
+    </div>
 
     <ul>
       <li>r = 50</li>
