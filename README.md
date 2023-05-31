@@ -3,6 +3,7 @@
 A simple doughnut "spark" chart created with generated SVG and css,
 allowing for dynamic display and update with VUE properties/values.
 
+Built using the `vue-cli` as scaffolding for the demo, but the core chart component itself does not depend on anything.
 
 ## Project setup
 ```
