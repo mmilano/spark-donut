@@ -1,5 +1,9 @@
 # spark-doughnut
 
+A simple doughnut "spark" chart created with generated SVG and css,
+allowing for dynamic display and update with VUE properties/values.
+
+
 ## Project setup
 ```
 npm install
