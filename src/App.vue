@@ -2,6 +2,9 @@
   <main id="app">
     <Demo />
 
+    <h1>Examples</h1>
+
+
     <h2>Example 1</h2>
     <div class="doughnut1">
       <SparkDoughnut v-bind="$options.doughnutExample1"></SparkDoughnut>
@@ -58,20 +61,4 @@ export default {
   .doughnut2 {
     width: 111px;
   }
-
-  // .o-spark {
-  //   border: 1px dotted #999;
-  //   width: 260px;
-  // }
-
-  // .o-doughnut-background {
-  //   stroke: #DDD;
-  // }
-
-  // .o-doughnut-arc {
-  //     transform: rotate(-180deg);
-  //     transform-origin: center;
-  //     stroke: #20894f;
-  // }
-
 </style>
