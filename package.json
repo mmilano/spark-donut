@@ -1,6 +1,6 @@
 {
   "name": "spark-doughnut",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -31,5 +31,6 @@
     "sass": "^1.68.0",
     "sass-loader": "^13.3.2",
     "vue-template-compiler": "^2.6.14"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
